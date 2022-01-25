@@ -1,4 +1,5 @@
 #![allow(dead_code)]
+// 异步 tokio
 
 use std::future::Future;
 use std::thread::sleep;
@@ -8,7 +9,7 @@ use std::pin::Pin;
 use std::task::{Context, Poll};
 
 #[tokio::main]
-pub async fn main(){
+pub async fn main() {
     sleep_fn().await;
     // This is running on a core thread.
 

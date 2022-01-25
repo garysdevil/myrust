@@ -18,7 +18,6 @@ fn interrup_fn() {
     }
 }
 
-
 pub fn main() {
     let sleep_fn = spawn(sleep_fn); // 生成一个子线程
     interrup_fn();
