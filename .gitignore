@@ -11,3 +11,4 @@ Cargo.lock
 
 
 .DS_store
+/src/main.rs

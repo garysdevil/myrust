@@ -5,4 +5,14 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[features] # 条件编译
+default = ["feature1"]
+feature1 = ["tokio"]
+
 [dependencies]
+# tokio = { version = "1.15.0", features = ["full"] }
+
+[dependencies.tokio] # 可选依赖，满足条件才拉取进行编译
+optional = true
+version = "1.15.0"
+features = ["full"]
