@@ -1,2 +1,3 @@
 pub mod pratice_1;
 pub mod pratice_2;
+pub mod pratice_3;
