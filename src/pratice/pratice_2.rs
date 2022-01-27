@@ -1,5 +1,6 @@
-#![allow(dead_code)]
 // 异步 tokio
+
+#![allow(dead_code)]
 
 use std::future::Future;
 use std::thread::sleep;

@@ -1,5 +1,6 @@
-#![allow(dead_code)]
 // 多线程
+
+#![allow(dead_code)]
 
 use std::thread::{sleep, spawn};
 use std::time::Duration;
