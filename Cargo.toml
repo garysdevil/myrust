@@ -6,13 +6,28 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [features] # 条件编译
-default = ["feature1"]
+# default = ["feature1"]
 feature1 = ["tokio"]
+feature2 = ["custom-macro"]
+
+# [lib] # 添加此配置则必须创建src/lib.rs文件(cargo new ${project} --lib 时会自动生成此文件)
+# proc-macro = true # 通知 cargo，该项目将会创建过程宏。 /src/lib.rs，只能定义宏
 
 [dependencies]
 # tokio = { version = "1.15.0", features = ["full"] }
+# custom-macro={path="/custom-macro"}
 
 [dependencies.tokio] # 可选依赖，满足条件才拉取进行编译
 optional = true
 version = "1.15.0"
 features = ["full"]
+
+[dependencies.custom-macro]
+optional = true
+path="custom-macro"
+
+# [dependencies.macro_2]
+# # 创建过程宏时的第三方工具
+# quote = "1.0.9"                
+# proc-macro2 = "1.0.27" 
+# syn = {version="1.0.72", features=["full"]}

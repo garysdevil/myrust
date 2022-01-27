@@ -12,3 +12,4 @@ Cargo.lock
 
 .DS_store
 src/local.rs
+*/target/

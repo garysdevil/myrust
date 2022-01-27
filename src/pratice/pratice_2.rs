@@ -9,6 +9,7 @@ use std::time::Duration;
 use std::pin::Pin;
 use std::task::{Context, Poll};
 
+#[cfg(feature1)]
 #[tokio::main]
 pub async fn main() {
     sleep_fn().await;

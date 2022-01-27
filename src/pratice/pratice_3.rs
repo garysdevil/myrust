@@ -2,9 +2,12 @@
 
 #![allow(dead_code)]
 
+#[cfg(feature1)]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(feature1)]
 use tokio::net::TcpListener;
 
+#[cfg(feature1)]
 #[tokio::main]
 pub async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let listener = TcpListener::bind("127.0.0.1:8080").await?;
