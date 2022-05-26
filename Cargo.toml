@@ -6,9 +6,13 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [[bin]]
-name = "myrust_1" # 构建后生成指定的二进制名。默认为文件夹名
+name = "myrust" # 构建后生成指定的二进制名。默认为文件夹名
 path = "src/main.rs" # 构建后生成指定的二进制名。默认为src/bin/${name}/main.rs
-required-features = ["feature1"]
+
+# [[bin]]
+# name = "myrust_1" # 构建后生成指定的二进制名。默认为文件夹名
+# path = "src/bin/myrust_1/main.rs" # 构建后生成指定的二进制名。默认为src/bin/${name}/main.rs
+# required-features = ["feature1"]
 
 [features] # 条件编译
 # default = ["feature1"]

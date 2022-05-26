@@ -1,4 +1,4 @@
-// 异步 tokio
+// 异步运行时 tokio
 
 #![allow(dead_code)]
 
@@ -9,8 +9,9 @@ use std::time::Duration;
 use std::pin::Pin;
 use std::task::{Context, Poll};
 
-#[cfg(feature1)]
+
 #[tokio::main]
+#[cfg(feature = "feature1")]
 pub async fn main() {
     sleep_fn().await;
     // This is running on a core thread.
