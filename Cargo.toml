@@ -5,12 +5,18 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[[bin]]
+name = "myrust_1" # 构建后生成指定的二进制名。默认为文件夹名
+path = "src/main.rs" # 构建后生成指定的二进制名。默认为src/bin/${name}/main.rs
+required-features = ["feature1"]
+
 [features] # 条件编译
 # default = ["feature1"]
 feature1 = ["tokio"]
 feature2 = ["custom-macro"]
 
-# [lib] # 添加此配置则必须创建src/lib.rs文件(cargo new ${project} --lib 时会自动生成此文件)
+[lib] # 添加此配置则必须创建src/lib.rs文件(cargo new ${project} --lib 时会自动生成此文件)
+path = "src/lib.rs" # 可以手动指定lib.rs文件的路径
 # proc-macro = true # 通知 cargo，该项目将会创建过程宏。 /src/lib.rs，只能定义宏
 
 [dependencies]
@@ -31,3 +37,11 @@ path="custom-macro"
 # quote = "1.0.9"                
 # proc-macro2 = "1.0.27" 
 # syn = {version="1.0.72", features=["full"]}
+
+
+[dev-dependencies]
+criterion = "0.3"
+
+[[bench]]
+name = "my_benchmark"
+harness = false
