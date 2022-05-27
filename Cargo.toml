@@ -25,7 +25,7 @@ path = "src/lib.rs" # 可以手动指定lib.rs文件的路径
 
 [dependencies]
 # tokio = { version = "1.15.0", features = ["full"] }
-# custom-macro={path="/custom-macro"}
+# custom-macro={path="./custom-macro"}
 
 [dependencies.tokio] # 可选依赖，满足条件才拉取进行编译
 optional = true

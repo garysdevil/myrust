@@ -5,7 +5,7 @@
 #[cfg(feature2)]
 extern crate custom_macro;
 
-#[cfg(feature1)]
+#[cfg(feature = "feature2")]
 pub fn main() {
 
     use custom_macro::my_attr_macro;

@@ -1,8 +1,8 @@
 // 定义过程宏
 
-use proc_macro::TokenStream;
-
 extern crate proc_macro;
+
+use proc_macro::TokenStream;
 
 // 属性宏 （两个参数）
 #[proc_macro_attribute]
