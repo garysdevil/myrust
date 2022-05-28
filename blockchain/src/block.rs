@@ -12,7 +12,7 @@ pub struct BlockHeader {
 #[derive(Debug)]
 pub struct Block {
     pub header: BlockHeader,
-    /// List of transactions contained in the block // 理论上数据类型应该是集合
+    /// List of transactions contained in the block
     pub data: String,
 }
 

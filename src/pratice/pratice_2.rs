@@ -9,13 +9,12 @@ use std::time::Duration;
 use std::pin::Pin;
 use std::task::{Context, Poll};
 
-
 #[tokio::main]
 #[cfg(feature = "feature1")]
 pub async fn main() {
     // This is running on a core thread.
     println!("We are in pratice_2.rs");
-    
+
     fn_for();
 
     fn_future().await;
@@ -43,7 +42,6 @@ impl Future for DoNothing {
         // unimplemented!()
     }
 }
-
 
 fn fn_future() -> impl Future<Output = ()> {
     DoNothing

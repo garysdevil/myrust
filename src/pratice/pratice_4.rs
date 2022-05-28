@@ -10,7 +10,7 @@ pub fn main() {
         ($($x:expr), *) => {
             {
                 let mut temp_vec = Vec::new();
-                $(                          
+                $(
                     println!("{}", $x);
                     temp_vec.push($x);
                 )*  // 多次匹配会多次运行这个代码块.
@@ -18,6 +18,6 @@ pub fn main() {
             }
         }
     }
-    let x = list!(1,2,3);
+    let x = list!(1, 2, 3);
     println!("{:?}", x)
 }

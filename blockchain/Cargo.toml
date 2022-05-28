@@ -6,6 +6,6 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-serde = { version = "1.0.137", features = ["derive"] } # 通过派生宏给结构体等提供序列化特性
+serde = { version = "1.0.137", features = ["derive"] }
 chrono = "0.4.19"
 myutils = { path = "../myutils" }

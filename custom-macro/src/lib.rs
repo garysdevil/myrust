@@ -6,7 +6,7 @@ use proc_macro::TokenStream;
 
 // 属性宏 （两个参数）
 #[proc_macro_attribute]
-pub fn my_attr_macro(attr:TokenStream, item:TokenStream)->TokenStream{
+pub fn my_attr_macro(attr: TokenStream, item: TokenStream) -> TokenStream {
     println!("Attr:{}", attr.to_string());
     println!("Item:{}", item.to_string());
     item
@@ -24,9 +24,9 @@ pub fn my_func_macro(item: TokenStream) -> TokenStream {
 
 // 派生宏
 #[proc_macro_derive(Hello)]
-pub fn my_derived_macro(input: TokenStream)-> TokenStream {
+pub fn my_derived_macro(input: TokenStream) -> TokenStream {
     println!("{:?}", input);
-    TokenStream::new()  
+    TokenStream::new()
     // 如果直接返回input，编译会报重复定义，说明派生宏用于扩展定义
     // input
 }

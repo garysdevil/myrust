@@ -1,18 +1,20 @@
 # myrust
 
-## 代码规范
+## 编译测试运行代码
+```rs
+cargo run
+
+cargo test --bin myrust
+
+cargo run --features feature1 
+```
+
+## 提交代码
 ```bash
 # 代码格式化
 cargo fmt
 
-# 代码提交
-```
-
-## 项目的运行
-```rs
-cargo run
-
-cargo run --features feature1 
+# 提交代码
 ```
 
 ## 项目的创建过程
