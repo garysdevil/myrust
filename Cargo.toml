@@ -12,12 +12,12 @@ path = "src/main.rs" # 构建后生成指定的二进制名。默认为src/bin/$
 
 [[bin]]
 name = "blockchain"
-path = "blockchain/src/main.rs" # 构建后生成指定的二进制名。默认为src/bin/${name}/main.rs
+# path = "src/bin/blockchain/main.rs" # 构建后生成指定的二进制名。默认为src/bin/${name}/main.rs
 # required-features = ["feature1"]
 
 [workspace]
-# members = [ "blockchain" ] # 共享同样的 Cargo.lock 和 target输出目录。通过共享一个 target 目录，工作空间可以避免其他 crate 多余的重复构建。但子项目的依赖需要在这个文件和子项目的Cargo.toml文件里进行标注。
-exclude = ["myutils", "blockchain"]
+members = ["myutils", "myblockchain"]# 共享同样的 Cargo.lock 和 target输出目录。通过共享一个 target 目录，工作空间可以避免其他 crate 多余的重复构建。但子项目的依赖需要在这个文件和子项目的Cargo.toml文件里进行标注。
+# exclude = ["myutils", "myblockchain"]
 
 [features] # 条件编译
 # default = ["feature1"]
@@ -33,7 +33,8 @@ path = "src/lib.rs" # 可以手动指定lib.rs文件的路径
 # custom-macro={path="./custom-macro"}
 # serde = { version = "1.0.137", features = ["derive"] } # 通过派生宏给结构体等提供序列化特性
 # chrono = "0.4.19"
-# myutils = { path = "./myutils" }
+myutils = { path = "./myutils" }
+myblockchain = { path = "./myblockchain" }
 
 [dependencies.tokio] # 可选依赖，满足条件才拉取进行编译
 optional = true

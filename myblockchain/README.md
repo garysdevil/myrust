@@ -4,6 +4,6 @@
 # 代码格式化
 cargo fmt
 
-# 编译运行
-cargo run
+# 测试
+cargo test
 ```
