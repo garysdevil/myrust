@@ -1,12 +1,28 @@
 # myrust
 
-## 编译测试运行代码
-```rs
+## 开发
+```bash
+# 运行
 cargo run
-
-cargo test --bin myrust
-
+# 运行满足特定条件的代码
 cargo run --features feature1 
+
+# 运行区块链模拟功能
+cargo run --bin blockchain
+```
+
+```bash
+# 测试
+cargo test 
+# 运行 模块名称或者测试函数名称 包含有特定字符串的测试
+cargo test ${name_filter}
+```
+
+```bash
+# 基准测试
+cargo bench
+# 运行特定的基准测试
+cargo bench --bench benchmark1
 ```
 
 ## 提交代码
@@ -15,6 +31,7 @@ cargo run --features feature1
 cargo fmt
 
 # 提交代码
+git
 ```
 
 ## 项目的创建过程
@@ -22,6 +39,12 @@ cargo fmt
 # 创建这个项目
 cargo new myrust
 
-# 创建子项目 过程宏
+# 创建lib项目 过程宏
 cargo new custom-macro --lib
+
+# 创建lib项目 工具包
+cargo new myutils --lib
+
+# 创建lib项目 区块链功能模拟
+cargo new blockchain --lib
 ```

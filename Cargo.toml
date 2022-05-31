@@ -56,5 +56,5 @@ path="custom-macro"
 criterion = { version = "0.3.5" }
 
 [[bench]]
-name = "my_benchmark"
+name = "benchmark1" # 默认回去这些路径寻找文件 benches/${name}/main.rs benches/${name}.rs
 harness = false
