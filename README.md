@@ -25,6 +25,17 @@ cargo bench
 cargo bench --bench benchmark1
 ```
 
+## 生成文档
+```bash
+# 生成一个文件的文档
+cd mydocs && rustdoc src/lib.rs
+# 文档位置 doc/lib/index.html
+
+# 生成整个项目的文档
+cargo doc
+# 文档位置 target/doc/lib/
+```
+
 ## 提交代码
 ```bash
 # 代码格式化

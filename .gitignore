@@ -12,6 +12,7 @@ Cargo.lock
 
 .DS_store
 */target/
+mydocs/doc/
 
 src/local1.rs
 src/local2.rs
