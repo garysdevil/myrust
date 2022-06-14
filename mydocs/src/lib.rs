@@ -12,5 +12,4 @@ pub mod easy {
 
     /// Use the abstraction function to do this specific thing.
     pub fn abstraction() {}
-
 }

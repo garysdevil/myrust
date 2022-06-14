@@ -29,16 +29,14 @@ path = "src/lib.rs" # 可以手动指定lib.rs文件的路径
 # proc-macro = true # 通知 cargo，该项目将会创建过程宏。 /src/lib.rs，只能定义宏
 
 [dependencies]
-# tokio = { version = "1.18.2", features = ["full"] }
-# custom-macro={path="./custom-macro"}
-# serde = { version = "1.0.137", features = ["derive"] } # 通过派生宏给结构体等提供序列化特性
-# chrono = "0.4.19"
+rand = { version = "0.8.5" }
+# tokio = { version = "1.19.2", features = ["full"] }
 myutils = { path = "./myutils" }
 myblockchain = { path = "./myblockchain" }
 
 [dependencies.tokio] # 可选依赖，满足条件才拉取进行编译
 optional = true
-version = "^1.18.2"
+version = "^1.19.2"
 features = ["full"]
 
 [dependencies.custom-macro]
