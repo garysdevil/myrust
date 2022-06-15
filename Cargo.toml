@@ -30,7 +30,7 @@ path = "src/lib.rs" # 可以手动指定lib.rs文件的路径
 
 [dependencies]
 rand = { version = "0.8.5" }
-# tokio = { version = "1.19.2", features = ["full"] }
+clap = { version = "3.2.4", features = [ "derive" ] }
 myutils = { path = "./myutils" }
 myblockchain = { path = "./myblockchain" }
 
