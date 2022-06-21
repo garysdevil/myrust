@@ -14,5 +14,5 @@ Cargo.lock
 */target/
 mydocs/doc/
 
-src/local1.rs
-src/local2.rs
+local_*
+local.*

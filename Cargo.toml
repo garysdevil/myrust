@@ -20,7 +20,7 @@ members = ["myutils", "myblockchain", "mydocs"]# 共享同样的 Cargo.lock 和 
 # exclude = ["myutils", "myblockchain"]
 
 [features] # 条件编译
-# default = ["feature1"]
+default = ["feature1"]
 feature1 = ["tokio"]
 feature2 = ["custom-macro"]
 
@@ -31,13 +31,19 @@ path = "src/lib.rs" # 可以手动指定lib.rs文件的路径
 [dependencies]
 rand = { version = "0.8.5" }
 clap = { version = "3.2.4", features = [ "derive" ] }
+chrono = { version="0.4.19" }
+num_cpus = { version = "1.13.1" } 
+rocksdb = { version = "0.18.0" } # Rust实现的RocksDB
 myutils = { path = "./myutils" }
 myblockchain = { path = "./myblockchain" }
 
-[dependencies.tokio] # 可选依赖，满足条件才拉取进行编译
-optional = true
+[dependencies.tokio]
+optional = true # 可选依赖，满足条件才拉取进行编译
 version = "^1.19.2"
 features = ["full"]
+
+[dependencies.rayon]
+rayon = "1.5.3"
 
 [dependencies.custom-macro]
 optional = true
