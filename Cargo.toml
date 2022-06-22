@@ -43,7 +43,7 @@ version = "^1.19.2"
 features = ["full"]
 
 [dependencies.rayon]
-rayon = "1.5.3"
+version = "1.5.3"
 
 [dependencies.custom-macro]
 optional = true
