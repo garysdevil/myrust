@@ -2,7 +2,6 @@ mod local_1;
 mod local_2;
 mod pratice;
 mod root;
-mod test;
 
 fn main() {
     println!("I am the main() function");

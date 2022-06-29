@@ -1,13 +1,16 @@
+// 从0到100猜数字的游戏
+// 练习读取命令行的标准输入
+
 #![allow(dead_code)]
 
-use rand::Rng;
-use std::cmp::Ordering;
-use std::io;
+use rand::Rng; // 提供随机功能
+use std::cmp::Ordering; // 提供数字比较功能
+use std::io; // 可以处理命令行标准输入
 
 pub fn main() {
     println!("Game: start to guess the lucky number!");
 
-    let lucky_number: u32 = rand::thread_rng().gen_range(0..100);
+    let lucky_number: u32 = rand::thread_rng().gen_range(0..100); // 生成一个随机数字
 
     loop {
         let mut guess_nunmber: String = String::new();
