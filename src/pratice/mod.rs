@@ -7,3 +7,5 @@ pub mod tokio_2;
 pub mod clap;
 pub mod closure;
 pub mod game_guess;
+pub mod iter_filter;
+pub mod iter_all;
