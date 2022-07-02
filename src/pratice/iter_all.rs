@@ -1,5 +1,7 @@
 // 自定义结构体实现迭代器特性
 // 使用标准库中定义好的Iterator特性所实现的一些关于迭代器的关联方法
+#![allow(dead_code)]
+
 struct Counter {
     count: u32,
 }

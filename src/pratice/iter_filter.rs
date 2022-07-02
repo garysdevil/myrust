@@ -1,5 +1,7 @@
 // 利用filter函数返回符合条件的集合元素
 
+#![allow(dead_code)]
+
 #[derive(PartialEq, Debug)]
 struct Shoe {
     size: u32,

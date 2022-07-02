@@ -60,5 +60,11 @@ path="custom-macro"
 criterion = { version = "0.3.5" }
 
 [[bench]]
-name = "benchmark1" # 默认回去这些路径寻找文件 benches/${name}/main.rs benches/${name}.rs
+name = "benchmark1" # 默认会去这些路径寻找文件 benches/${name}/main.rs benches/${name}.rs
 harness = false
+
+[profile.dev]
+opt-level = 0 # opt-level代表了优化等级，从0到3，开发模式的默认优化等级是0。（cargo build）
+
+[profile.release]
+opt-level = 3 # 发布模式的默认优化等级是3.（cargo build --release）
