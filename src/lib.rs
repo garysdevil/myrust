@@ -16,7 +16,7 @@ pub fn main() {
 ///
 /// ```
 /// let arg = 5;
-/// let answer = myrust::pratice::comment::add_one(arg);
+/// let answer = myrust::add_one(arg);
 ///
 /// assert_eq!(6, answer);
 /// ```
