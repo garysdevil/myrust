@@ -7,9 +7,10 @@ edition = "2021"
 
 [dependencies]
 # # 创建过程宏时的第三方工具
-# quote = "1.0.9"                
+# syn = {version="1.0.72", features=["full"]} # 解析rust代码为syn数据结构
+# quote = "1.0.9" # 将syn数据结构转回为rust代码
 # proc-macro2 = "1.0.27" 
-# syn = {version="1.0.72", features=["full"]}
+
 
 [lib] # 添加此配置则必须创建src/lib.rs文件(cargo new ${project} --lib 时会自动生成此文件)
 proc-macro = true # 通知 cargo，该项目将会创建过程宏。 /src/lib.rs，只能定义宏
