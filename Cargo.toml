@@ -40,6 +40,9 @@ myblockchain = { path = "./myblockchain" }
 tracing = "0.1"
 tracing-subscriber = "0.3"
 
+mini-redis = "0.4" # 学习tokio时需要用到
+bytes = "1.2"
+
 [dependencies.tokio]
 optional = true # 可选依赖，满足条件才拉取进行编译
 version = "^1.19.2"
