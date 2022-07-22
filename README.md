@@ -4,11 +4,9 @@
 ```bash
 # 运行
 cargo run
-# 运行满足特定条件的代码
-cargo run --features feature1 
 
 # 运行区块链模拟功能
-cargo run --bin blockchain
+cargo run --bin blockchain --features="feature_myblockchain"
 ```
 
 ```bash

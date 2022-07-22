@@ -12,17 +12,23 @@ path = "src/main.rs" # 构建后生成指定的二进制名。默认为src/bin/$
 
 [[bin]]
 name = "blockchain"
-# path = "src/bin/blockchain/main.rs" # 构建后生成指定的二进制名。默认为src/bin/${name}/main.rs
-# required-features = ["feature1"]
+# path = "src/bin/myblockchain/main.rs" # 构建后生成指定的二进制名。默认为src/bin/${name}/main.rs
+required-features = ["feature_myblockchain"]
+
+[[bin]]
+name = "miniredis"
+required-features = ["feature_miniredis"]
 
 [workspace]
 members = ["myutils", "myblockchain", "mydocs"]# 共享同样的 Cargo.lock 和 target输出目录。通过共享一个 target 目录，工作空间可以避免其他 crate 多余的重复构建。但子项目的依赖需要在这个文件和子项目的Cargo.toml文件里进行标注。
 # exclude = ["myutils", "myblockchain"]
 
 [features] # 条件编译
-default = ["feature1"]
-feature1 = ["tokio"]
-feature2 = ["custom-macro"]
+default = ["feature_rayon"]
+feature_rayon = ["rayon"]
+feature_custommacro = ["custom-macro"]
+feature_miniredis = ["mini-redis"]
+feature_myblockchain= ["myblockchain"]
 
 [lib] # 添加此配置则必须创建src/lib.rs文件(cargo new ${project} --lib 时会自动生成此文件)
 path = "src/lib.rs" # 可以手动指定lib.rs文件的路径
@@ -33,27 +39,34 @@ rand = { version = "0.8.5" }
 clap = { version = "3.2.4", features = [ "derive" ] }
 chrono = { version="0.4.19" }
 num_cpus = { version = "1.13.1" } 
-rocksdb = { version = "0.18.0" } # Rust实现的RocksDB
+rocksdb = { version = "0.18.0" }
 myutils = { path = "./myutils" }
-myblockchain = { path = "./myblockchain" }
 
-tracing = "0.1"
-tracing-subscriber = "0.3"
+tracing = { version = "0.1.35"  }
+tracing-subscriber = { version = "0.3.15", default-features = false, features = ["fmt", "ansi", "env-filter", "tracing-log"] }
 
-mini-redis = "0.4" # 学习tokio时需要用到
 bytes = "1.2"
 
-[dependencies.tokio]
-optional = true # 可选依赖，满足条件才拉取进行编译
-version = "^1.19.2"
-features = ["full"]
+tokio = { version = "^1.19.2", features = ["full"] }
+tokio-stream = { version = "0.1.9" } 
+tokio-util = { version = "0.7.3", features = ["full"] } 
+futures = { version = "0.3.21" }
 
 [dependencies.rayon]
+optional = true
 version = "1.5.3"
 
-[dependencies.custom-macro]
+[dependencies.mini-redis]
 optional = true
-path="custom-macro"
+version = "0.4" # 学习tokio时需要用到
+
+[dependencies.myblockchain]
+optional = true # # 可选依赖，满足条件才拉取进行编译
+path="./myblockchain"
+
+[dependencies.custom-macro]
+optional = true # # 可选依赖，满足条件才拉取进行编译
+path="./custom-macro"
 
 # [dependencies.macro_2]
 # # 创建过程宏时的第三方工具

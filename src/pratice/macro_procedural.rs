@@ -1,20 +1,20 @@
 // 使用自定义的过程宏 Procedural Macro
 #![allow(dead_code)]
-#[cfg(feature = "feature2")]
+#[cfg(feature = "feature_custommacro")]
 use custom_macro::my_attr_macro;
-#[cfg(feature = "feature2")]
+#[cfg(feature = "feature_custommacro")]
 use custom_macro::my_func_macro;
-#[cfg(feature = "feature2")]
+#[cfg(feature = "feature_custommacro")]
 use custom_macro::Hello;
 
-#[cfg(feature = "feature2")]
+#[cfg(feature = "feature_custommacro")]
 pub fn main() {
     example_func_macro();
     example_attri_macro();
     example_derive_macro();
 }
 
-#[cfg(feature = "feature2")]
+#[cfg(feature = "feature_custommacro")]
 fn example_func_macro() {
     // 使用函数宏
     my_func_macro!(world);
@@ -25,7 +25,7 @@ fn example_func_macro() {
     hello_张三();
 }
 
-#[cfg(feature = "feature2")]
+#[cfg(feature = "feature_custommacro")]
 fn example_attri_macro() {
     #[my_attr_macro(struct, "world")] // 使用属性宏
     struct Hello {
@@ -36,7 +36,7 @@ fn example_attri_macro() {
     fn invoked() {}
 }
 
-#[cfg(feature = "feature2")]
+#[cfg(feature = "feature_custommacro")]
 fn example_derive_macro() {
     // 使用派生宏
     #[derive(Hello)]

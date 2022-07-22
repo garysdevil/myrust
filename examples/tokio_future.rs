@@ -31,7 +31,8 @@ impl Future for Delay {
 
 #[tokio::main]
 async fn main() {
-    let when = Instant::now() + Duration::from_millis(10);
+    println!("==========="); 
+    let when = Instant::now() + Duration::from_secs(1);
     let future = Delay { when };
 
     let out = future.await;

@@ -10,7 +10,6 @@ use std::pin::Pin;
 use std::task::{Context, Poll};
 
 #[tokio::main]
-#[cfg(feature = "feature1")]
 pub async fn main() {
     // This is running on a core thread.
     println!("I am in tokio_2.rs file\n");
