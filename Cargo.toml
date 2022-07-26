@@ -24,7 +24,7 @@ members = ["myutils", "myblockchain", "mydocs"]# 共享同样的 Cargo.lock 和 
 # exclude = ["myutils", "myblockchain"]
 
 [features] # 条件编译
-default = ["feature_rayon"]
+default = ["feature_miniredis"]
 feature_rayon = ["rayon"]
 feature_custommacro = ["custom-macro"]
 feature_miniredis = ["mini-redis"]
@@ -44,10 +44,11 @@ myutils = { path = "./myutils" }
 
 tracing = { version = "0.1.35"  }
 tracing-subscriber = { version = "0.3.15", default-features = false, features = ["fmt", "ansi", "env-filter", "tracing-log"] }
-
+console-subscriber = { version = "0.1.6"  }
 bytes = "1.2"
 
-tokio = { version = "^1.19.2", features = ["full"] }
+# tokio = { version = "^1.19.2", features = ["full"] }
+tokio = { version = "1", features = ["full", "tracing"] } # 异步运行时库 # 开启 tokio-console 功能，tokio-console 还是一个不稳定的功能，RUSTFLAGS="--cfg tokio_unstable" cargo run
 tokio-stream = { version = "0.1.9" } 
 tokio-util = { version = "0.7.3", features = ["full"] } 
 futures = { version = "0.3.21" }
