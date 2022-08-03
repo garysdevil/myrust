@@ -1,13 +1,19 @@
-use std::sync::mpsc;
-use std::sync::Arc;
-use std::sync::Mutex;
-use std::thread;
+//线程池
 
+use std::{
+    sync::{mpsc, Arc, Mutex},
+    thread,
+};
+
+// 构建线程池
+// workers负责执行任务。每个worker都会去抢占获取通道receiver锁，从而收到来自发送端的信息。
+// 通道sender负责发送任务给receiver。
 pub struct ThreadPool {
     workers: Vec<Worker>,
-    sender: mpsc::Sender<Job>,
+    sender: Option<mpsc::Sender<Job>>,
 }
 
+// 任务，是一个被Box包裹的闭包函数，需要满足dyn FnOnce() + Send + 'static三个特征
 type Job = Box<dyn FnOnce() + Send + 'static>;
 
 impl ThreadPool {
@@ -31,7 +37,10 @@ impl ThreadPool {
             workers.push(Worker::new(id, Arc::clone(&receiver)));
         }
 
-        ThreadPool { workers, sender }
+        ThreadPool {
+            workers,
+            sender: Some(sender),
+        }
     }
 
     pub fn execute<F>(&self, f: F)
@@ -40,27 +49,51 @@ impl ThreadPool {
     {
         let job = Box::new(f);
 
-        self.sender.send(job).unwrap();
+        self.sender.as_ref().unwrap().send(job).unwrap();
     }
 }
 
-struct Worker {
-    id: usize,
-    thread: thread::JoinHandle<()>,
+impl Drop for ThreadPool {
+    fn drop(&mut self) {
+        drop(self.sender.take());
+
+        for worker in &mut self.workers {
+            println!("Shutting down worker {}", worker.id);
+
+            if let Some(thread) = worker.thread.take() {
+                thread.join().unwrap();
+            }
+        }
+    }
 }
 
+// 构建Worker
+struct Worker {
+    id: usize,
+    thread: Option<thread::JoinHandle<()>>, // 使用Option包裹JoinHandle，当进行优雅关闭时，可以使用Option.take函数将其逐个移出，可以使用JoinHandle.join函数阻塞主线程等待子线程运行结束。
+}
 
 impl Worker {
     fn new(id: usize, receiver: Arc<Mutex<mpsc::Receiver<Job>>>) -> Worker {
         let thread = thread::spawn(move || loop {
-            println!("i am running");
-            let job = receiver.lock().unwrap().recv().unwrap();
+            let message = receiver.lock().unwrap().recv();
+            match message {
+                Ok(job) => {
+                    println!("Worker {id} got a job; executing.");
 
-            println!("Worker {} got a job; executing.", id);
-
-            job();
+                    job();
+                }
+                Err(e) => {
+                    println!("{}",e);
+                    println!("Worker {id} disconnected; shutting down.");
+                    break;
+                }
+            }
         });
 
-        Worker { id, thread }
+        Worker {
+            id,
+            thread: Some(thread),
+        }
     }
 }
