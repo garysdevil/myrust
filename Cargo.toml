@@ -24,7 +24,7 @@ members = ["myutils", "myblockchain", "mydocs"]# 共享同样的 Cargo.lock 和 
 # exclude = ["myutils", "myblockchain"]
 
 [features] # 条件编译
-default = ["feature_miniredis"]
+default = ["feature_rayon"]
 feature_rayon = ["rayon"]
 feature_custommacro = ["custom-macro"]
 feature_miniredis = ["mini-redis"]

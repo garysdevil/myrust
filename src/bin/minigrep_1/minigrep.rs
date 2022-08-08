@@ -47,7 +47,6 @@ impl Config {
     }
 }
 
-
 // 逻辑代码的入口
 pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     let contents = fs::read_to_string(config.filename)?;

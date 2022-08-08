@@ -10,10 +10,12 @@ impl Counter {
         Counter { count: 0 }
     }
 }
-impl Iterator for Counter { // 实现迭代器特性
+impl Iterator for Counter {
+    // 实现迭代器特性
     type Item = u32;
 
-    fn next(&mut self) -> Option<Self::Item> { // 实现迭代器接口
+    fn next(&mut self) -> Option<Self::Item> {
+        // 实现迭代器接口
         if self.count < 5 {
             self.count += 1;
             Some(self.count)
@@ -42,7 +44,7 @@ mod tests {
     fn using_other_iterator_trait_methods() {
         let sum: u32 = Counter::new()
             .zip(Counter::new().skip(1)) // zip函数将两个迭代器合成一个迭代器对
-            .map(|(a, b)| a * b) 
+            .map(|(a, b)| a * b)
             .filter(|x| x % 3 == 0)
             .sum();
         assert_eq!(18, sum);

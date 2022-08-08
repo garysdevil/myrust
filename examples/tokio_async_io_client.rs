@@ -26,7 +26,7 @@ async fn main() -> io::Result<()> {
         if n == 0 {
             break;
         }
-        
+
         println!("GOT {:?}", &buf[..n]);
         println!("GOT {:?}", std::str::from_utf8(&buf).unwrap());
     }

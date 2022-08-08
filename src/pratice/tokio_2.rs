@@ -13,7 +13,7 @@ use std::task::{Context, Poll};
 pub async fn main() {
     // This is running on a core thread.
     println!("I am in tokio_2.rs file\n");
-    
+
     let blocking_task = tokio::task::spawn_blocking(|| {
         println!("I am blocking_task1\n");
         sleep(Duration::from_millis(1000));
@@ -27,7 +27,7 @@ pub async fn main() {
     });
 
     fn_future().await;
-    
+
     blocking_task.await.unwrap();
 
     async_task.await.unwrap();

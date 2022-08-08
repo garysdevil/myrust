@@ -1,7 +1,7 @@
+use bytes::Bytes;
 use mini_redis::client;
 use tokio::sync::mpsc;
 use tokio::sync::oneshot;
-use bytes::Bytes;
 type Responder<T> = oneshot::Sender<mini_redis::Result<T>>;
 
 // 定义枚举，作为消息内容
@@ -15,9 +15,8 @@ enum Command {
         key: String,
         val: Bytes,
         resp: Responder<()>,
-    }
+    },
 }
-
 
 #[tokio::main]
 async fn main() {
@@ -33,10 +32,9 @@ async fn main() {
     t1.await.unwrap();
     t2.await.unwrap();
     manager.await.unwrap();
-
 }
 
-fn task_redis_get(tx: tokio::sync::mpsc::Sender<Command>) -> tokio::task::JoinHandle<()>{
+fn task_redis_get(tx: tokio::sync::mpsc::Sender<Command>) -> tokio::task::JoinHandle<()> {
     let t1 = tokio::spawn(async move {
         let (resp_tx, resp_rx) = oneshot::channel();
         let cmd = Command::Get {
@@ -50,12 +48,11 @@ fn task_redis_get(tx: tokio::sync::mpsc::Sender<Command>) -> tokio::task::JoinHa
         // 等待回复
         let res = resp_rx.await;
         println!("GOT = {:?}", res);
-
     });
     t1
 }
 
-fn task_redis_set(tx2: tokio::sync::mpsc::Sender<Command>) -> tokio::task::JoinHandle<()>{
+fn task_redis_set(tx2: tokio::sync::mpsc::Sender<Command>) -> tokio::task::JoinHandle<()> {
     let t2 = tokio::spawn(async move {
         let (resp_tx, resp_rx) = oneshot::channel();
         let cmd = Command::Set {
@@ -75,7 +72,7 @@ fn task_redis_set(tx2: tokio::sync::mpsc::Sender<Command>) -> tokio::task::JoinH
 }
 
 // 消息的接受者，redis命令的执行者
-fn manager(mut rx: tokio::sync::mpsc::Receiver<Command>) -> tokio::task::JoinHandle<()>{
+fn manager(mut rx: tokio::sync::mpsc::Receiver<Command>) -> tokio::task::JoinHandle<()> {
     // 将消息通道接收者 rx 的所有权转移到管理任务中
     let manager = tokio::spawn(async move {
         // 建立到 redis 服务器的连接
@@ -86,13 +83,12 @@ fn manager(mut rx: tokio::sync::mpsc::Receiver<Command>) -> tokio::task::JoinHan
             use Command::*;
 
             match cmd {
-                Get { key , resp} => {
+                Get { key, resp } => {
                     let res = client.get(&key).await;
                     // 忽略错误
                     let _ = resp.send(res);
-
                 }
-                Set { key, val ,resp} => {
+                Set { key, val, resp } => {
                     let res = client.set(&key, val).await;
                     // 忽略错误
                     let _ = resp.send(res);

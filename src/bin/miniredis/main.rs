@@ -1,9 +1,9 @@
-use tokio::net::{TcpListener, TcpStream};
-use mini_redis::{Connection, Frame};
-use mini_redis::Command::{self, Get, Set};
-use std::sync::{Arc, Mutex};
-use std::collections::HashMap;
 use bytes::Bytes;
+use mini_redis::Command::{self, Get, Set};
+use mini_redis::{Connection, Frame};
+use std::collections::HashMap;
+use std::sync::{Arc, Mutex};
+use tokio::net::{TcpListener, TcpStream};
 
 #[tokio::main]
 async fn main() {
@@ -27,22 +27,21 @@ async fn main() {
     }
 }
 
-
-
 type Db = Arc<Mutex<HashMap<String, Bytes>>>;
 async fn process(socket: TcpStream, db: Db) {
-    // The `Connection` lets us read/write redis **frames** instead of byte streams. 
+    // The `Connection` lets us read/write redis **frames** instead of byte streams.
     // The `Connection` type is defined by mini-redis.
     let mut connection = Connection::new(socket);
 
     // 使用 `read_frame` 接收 connection 发送过来的指令
     while let Some(frame) = connection.read_frame().await.unwrap() {
         println!("GOT: {:?}", frame.clone());
-        let response = match Command::from_frame(frame).unwrap() { // 获取帧对应的指令
+        let response = match Command::from_frame(frame).unwrap() {
+            // 获取帧对应的指令
             Set(cmd) => {
                 let mut db = db.lock().unwrap();
                 db.insert(cmd.key().to_string(), cmd.value().clone()); // The value is stored as `bytes::Bytes`
-                
+
                 Frame::Simple("OK".to_string())
             }
             Get(cmd) => {
