@@ -1,4 +1,4 @@
-use crate::pratice::thread_pool::ThreadPool;
+use myrust::pratice::thread_pool::ThreadPool;
 use std::fs;
 use std::io::prelude::*;
 use std::net::TcpListener;
@@ -6,10 +6,11 @@ use std::net::TcpStream;
 use std::thread;
 use std::time::Duration;
 
-pub fn main() {
+fn main() {
     let pool = ThreadPool::new(2);
 
     let listener = TcpListener::bind("127.0.0.1:7878").unwrap();
+    println!("I am listening 127.0.0.1:7878");
 
     for stream in listener.incoming() {
         // for stream in listener.incoming().take(2) {

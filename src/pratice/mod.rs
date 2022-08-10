@@ -11,5 +11,3 @@ pub mod iter_all;
 pub mod iter_filter;
 
 pub mod thread_pool;
-pub mod web;
-pub mod web_multi;

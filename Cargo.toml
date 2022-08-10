@@ -36,6 +36,7 @@ path = "src/lib.rs" # 可以手动指定lib.rs文件的路径
 
 [dependencies]
 rand = { version = "0.8.5" }
+rand_chacha = { version = "0.3.1" } 
 clap = { version = "3.2.4", features = [ "derive" ] }
 chrono = { version="0.4.19" }
 num_cpus = { version = "1.13.1" } 

@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 //线程池
 
 use std::{
