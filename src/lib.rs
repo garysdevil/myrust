@@ -25,3 +25,4 @@ pub fn add_one(x: i32) -> i32 {
 }
 
 pub mod pratice;
+pub mod pratice_multi;
