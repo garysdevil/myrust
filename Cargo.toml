@@ -81,8 +81,11 @@ path="./custom-macro"
 criterion = { version = "0.3.5" }
 
 [[bench]]
-name = "benchmark1" # 默认会去这些路径寻找文件 benches/${name}/main.rs benches/${name}.rs
-harness = false
+name = "example_1" # 默认会去这些路径寻找文件 benches/${name}/main.rs benches/${name}.rs
+harness = false # 关闭使用标准库的harness，从而使用criterion的harness
+[[bench]]
+name = "example_2" # 默认会去这些路径寻找文件 benches/${name}/main.rs benches/${name}.rs
+harness = false # 关闭使用标准库的harness，从而使用criterion的harness
 
 [profile.dev]
 opt-level = 0 # opt-level代表了优化等级，从0到3，开发模式的默认优化等级是0。（cargo build）
