@@ -50,5 +50,10 @@ fn criterion_benchmark_2(c: &mut Criterion) {
     });
 }
 
-criterion_group!(benches, criterion_benchmark_1, criterion_benchmark_2);
+criterion_group! {
+    name = benches;
+    config = Criterion::default().sample_size(100);
+    targets = criterion_benchmark_1, criterion_benchmark_2,
+
+}
 criterion_main!(benches);
