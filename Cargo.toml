@@ -20,8 +20,8 @@ name = "miniredis"
 required-features = ["feature_miniredis"]
 
 [workspace]
-members = ["myutils", "myblockchain", "mydocs"]# 共享同样的 Cargo.lock 和 target输出目录。通过共享一个 target 目录，工作空间可以避免其他 crate 多余的重复构建。但子项目的依赖需要在这个文件和子项目的Cargo.toml文件里进行标注。
-# exclude = ["myutils", "myblockchain"]
+members = ["myutils", "myblockchain", "mydocs", "mycuda"]# 共享同样的 Cargo.lock 和 target输出目录。通过共享一个 target 目录，工作空间可以避免其他 crate 多余的重复构建。但子项目的依赖需要在这个文件和子项目的Cargo.toml文件里进行标注。
+# exclude = ["mycuda"]
 
 [features] # 条件编译
 default = ["feature_rayon"]
