@@ -6,7 +6,7 @@ use std::error::Error;
 use std::ffi::CString;
 
 fn main() -> Result<(), Box<dyn Error>> {
-        // Set up the context, load the module, and create a stream to run kernels in.
+    // Set up the context, load the module, and create a stream to run kernels in.
     // 设置上下文，加载模块，创建和内核交互的数据流
     rustacuda::init(CudaFlags::empty())?;
     let device = Device::get_device(1)?;
@@ -15,13 +15,13 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     let ptx = CString::new(include_str!("../resources/add.ptx"))?;
 
-    for i in 0..10000{
-        match test(ptx.clone()){
+    for i in 0..10000 {
+        match test(ptx.clone()) {
             Ok(()) => println!("{}. Great~", i),
-            Err(error) => println!("{}", error)
+            Err(error) => println!("{}", error),
         };
     }
-    
+
     Ok(())
 }
 fn test(ptx: CString) -> Result<(), Box<dyn Error>> {
@@ -36,7 +36,7 @@ fn test(ptx: CString) -> Result<(), Box<dyn Error>> {
     let mut out_2 = DeviceBuffer::from_slice(&[0.0f32; 1000000])?;
 
     // This kernel adds each element in `in_x` and `in_y` and writes the result into `out`.
-    // 
+    //
     unsafe {
         // Launch the kernel with one block of one thread, no dynamic shared memory on `stream`.
         // 方式一 通过一个线程一个块启动GPU内核，在 stream 上没有动态共享内存。
@@ -47,7 +47,6 @@ fn test(ptx: CString) -> Result<(), Box<dyn Error>> {
             out_1.len()
         ));
         result?;
-
 
         // Launch the kernel again using the `function` form:
         // 方式二 通过函数启动GPU内核

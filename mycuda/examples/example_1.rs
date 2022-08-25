@@ -26,7 +26,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let mut out_2 = DeviceBuffer::from_slice(&[0.0f32; 10])?;
 
     // This kernel adds each element in `in_x` and `in_y` and writes the result into `out`.
-    // 
+    //
     unsafe {
         // Launch the kernel with one block of one thread, no dynamic shared memory on `stream`.
         let result = launch!(module.sum<<<1, 1, 0, stream>>>(
@@ -36,7 +36,6 @@ fn main() -> Result<(), Box<dyn Error>> {
             out_1.len()
         ));
         result?;
-
 
         // Launch the kernel again using the `function` form:
         // 启动方式二 通过函数启动GPU内核
