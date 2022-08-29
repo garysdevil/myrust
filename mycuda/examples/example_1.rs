@@ -2,16 +2,30 @@
 extern crate rustacuda;
 
 use rustacuda::prelude::*;
+use rustacuda::device::{DeviceAttribute};
 use std::error::Error;
 use std::ffi::CString;
 
-// fn main(){}
 fn main() -> Result<(), Box<dyn Error>> {
     // Set up the context, load the module, and create a stream to run kernels in.
     // 设置上下文，加载模块，创建和内核交互的数据流
     rustacuda::init(CudaFlags::empty())?;
-    let device = Device::get_device(1)?;
-    dbg!(&device);
+    println!("显卡数量: {}", Device::num_devices().unwrap());
+    for device in Device::devices()? {
+        let device = device?;
+        let max_threads_per_block = device.get_attribute(DeviceAttribute::MaxThreadsPerBlock).unwrap();
+        let total_memory = device.total_memory().unwrap() as u64/1024/1024;
+        println!("{:?}, name={:?}, max_threads_per_block={}, total_memory={}", &device, device.name().unwrap(), max_threads_per_block, total_memory);
+    }
+
+    for device in Device::devices()? {
+        let device = device?;
+        detect(device)?;
+    };
+    Ok(())
+}
+
+fn detect(device: Device) -> Result<(), Box<dyn Error>> {
     let _ctx = Context::create_and_push(ContextFlags::MAP_HOST | ContextFlags::SCHED_AUTO, device)?;
 
     let ptx = CString::new(include_str!("../resources/add.ptx"))?;
@@ -66,6 +80,6 @@ fn main() -> Result<(), Box<dyn Error>> {
         assert_eq!(3.0 as u32, *x as u32);
     }
 
-    println!("Launched kernel successfully.");
+    println!("{:?}, Launched kernel successfully.", device);
     Ok(())
 }
