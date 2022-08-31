@@ -1,5 +1,4 @@
 mod local_1;
-mod local_2;
 mod pratice;
 mod pratice_multi;
 mod root;
