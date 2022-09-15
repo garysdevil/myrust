@@ -47,16 +47,15 @@ myutils = {path = "./myutils"}
 num_cpus = {version = "1.13.1"}
 rand = {version = "0.8.5"}
 rand_chacha = {version = "0.3.1"}
-rocksdb = {version = "0.18.0"}
+rocksdb = {version = "0.19.0"}
 
 bytes = "1.2"
 console-subscriber = {version = "0.1.6"}
 tracing = {version = "0.1.35"}
 tracing-subscriber = {version = "0.3.15", default-features = false, features = ["fmt", "ansi", "env-filter", "tracing-log"]}
 
-# tokio = { version = "^1.19.2", features = ["full"] }
 futures = {version = "0.3.21"}
-tokio = {version = "1", features = ["full", "tracing"]}# 异步运行时库 # 开启 tokio-console 功能，tokio-console 还是一个不稳定的功能，RUSTFLAGS="--cfg tokio_unstable" cargo run
+tokio = {version = "1.21.0", features = ["full", "tracing"]}# 异步运行时库 # 开启 tokio-console 功能，tokio-console 还是一个不稳定的功能，RUSTFLAGS="--cfg tokio_unstable" cargo run
 tokio-stream = {version = "0.1.9"}
 tokio-util = {version = "0.7.3", features = ["full"]}
 
@@ -66,7 +65,7 @@ version = "1.5.3"
 
 [dependencies.mini-redis]
 optional = true 
-version = "0.4" # 学习tokio时需要用到
+version = "0.4.1" # 学习tokio时需要用到
 
 [dependencies.myblockchain]
 optional = true # # 可选依赖，满足条件才拉取进行编译
